@@ -7,22 +7,22 @@ import {
 } from 'lucide-react';
 import { useStore } from '../store/useStore';
 
-const NAV = [
-  { icon: LayoutDashboard, label: 'Dashboard', active: true },
-  { icon: Package, label: 'Inventory' },
-  { icon: ShoppingCart, label: 'Orders' },
-  { icon: BarChart2, label: 'Analytics' },
-  { icon: Users, label: 'Customers' },
-  { icon: FileText, label: 'Reports' },
-];
-const BOTTOM_NAV = [
-  { icon: Settings, label: 'Settings' },
-  { icon: HelpCircle, label: 'Help' },
-  { icon: LogOut, label: 'Sign Out' },
-];
-
 export function Sidebar() {
-  const { sidebarOpen, toggleSidebar, theme } = useStore();
+  const { sidebarOpen, toggleSidebar, activeSection, setActiveSection } = useStore();
+
+  const NAV = [
+    { icon: LayoutDashboard, label: 'Overview' },
+    { icon: Package, label: 'Inventory' },
+    { icon: ShoppingCart, label: 'Orders' },
+    { icon: BarChart2, label: 'Analytics' },
+    { icon: Users, label: 'Customers' },
+    { icon: FileText, label: 'Reports' },
+  ];
+  const BOTTOM_NAV = [
+    { icon: Settings, label: 'Settings' },
+    { icon: HelpCircle, label: 'Help' },
+    { icon: LogOut, label: 'Sign Out' },
+  ];
 
   return (
     <AnimatePresence>
@@ -54,11 +54,12 @@ export function Sidebar() {
 
         {/* Nav items */}
         <nav className="flex-1 overflow-y-auto py-4 px-2 space-y-1">
-          {NAV.map(({ icon: Icon, label, active }) => (
+          {NAV.map(({ icon: Icon, label }) => (
             <button
               key={label}
+              onClick={() => setActiveSection(label)}
               className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all group ${
-                active
+                activeSection === label
                   ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/25'
                   : 'text-[var(--text-secondary)] hover:bg-[var(--bg-elevated)] hover:text-[var(--text-primary)]'
               }`}
@@ -85,7 +86,19 @@ export function Sidebar() {
           {BOTTOM_NAV.map(({ icon: Icon, label }) => (
             <button
               key={label}
-              className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm text-[var(--text-muted)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-elevated)] transition-all"
+              onClick={() => {
+                if (label === 'Sign Out') {
+                  alert('Signing out...');
+                  // Implement actual logout logic here
+                } else {
+                  setActiveSection(label);
+                }
+              }}
+              className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm transition-all ${
+                activeSection === label
+                  ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/25'
+                  : 'text-[var(--text-muted)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-elevated)]'
+              }`}
             >
               <Icon size={18} className="flex-shrink-0" />
               {sidebarOpen && <span className="whitespace-nowrap">{label}</span>}

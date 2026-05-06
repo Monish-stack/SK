@@ -5,6 +5,7 @@ export const useStore = create((set) => ({
   sidebarOpen: true,
   searchQuery: '',
   activeCategory: 'All',
+  activeSection: 'Overview',
   dateRange: '30d',
   notifications: [],
 
@@ -18,4 +19,5 @@ export const useStore = create((set) => ({
   setSearchQuery: (q) => set({ searchQuery: q }),
   setActiveCategory: (c) => set({ activeCategory: c }),
   setDateRange: (r) => set({ dateRange: r }),
+  setActiveSection: (section) => set({ activeSection: section }),
 }));
