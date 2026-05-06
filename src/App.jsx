@@ -80,7 +80,7 @@ export default function App() {
         return <SettingsView />;
       case 'Help':
         return <HelpView />;
-      case 'Overview':
+      case 'Dashboard':
       default:
         return (
           <>
@@ -123,13 +123,13 @@ export default function App() {
                 <span>Home</span><span>/</span><span className="text-[var(--text-primary)]">{activeSection}</span>
               </nav>
               <h1 className="text-xl font-bold text-[var(--text-primary)]">
-                {activeSection === 'Overview' ? 'Sales & Inventory ' : `${activeSection} `}
-                <span className="gradient-text">{activeSection === 'Overview' ? 'Overview' : 'Panel'}</span>
+                {activeSection === 'Dashboard' ? 'Sales & Inventory ' : `${activeSection} `}
+                <span className="gradient-text">{activeSection === 'Dashboard' ? 'Overview' : 'Panel'}</span>
               </h1>
             </div>
 
             {/* Date range quick-filter */}
-            {activeSection === 'Overview' && (
+            {activeSection === 'Dashboard' && (
               <div className="flex flex-wrap items-center gap-2">
                 {['7d','30d','90d','1y'].map(r => (
                   <Chip key={r} label={{ '7d':'7 Days','30d':'30 Days','90d':'90 Days','1y':'1 Year' }[r]}
@@ -143,7 +143,7 @@ export default function App() {
           </div>
 
           {/* Filter bar */}
-          {activeSection === 'Overview' && (
+          {activeSection === 'Dashboard' && (
             <motion.div
               initial={{ opacity: 0, y: -8 }}
               animate={{ opacity: 1, y: 0 }}

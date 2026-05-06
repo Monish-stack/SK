@@ -11,7 +11,7 @@ export function Sidebar() {
   const { sidebarOpen, toggleSidebar, activeSection, setActiveSection } = useStore();
 
   const NAV = [
-    { icon: LayoutDashboard, label: 'Overview' },
+    { icon: LayoutDashboard, label: 'Dashboard' },
     { icon: Package, label: 'Inventory' },
     { icon: ShoppingCart, label: 'Orders' },
     { icon: BarChart2, label: 'Analytics' },
